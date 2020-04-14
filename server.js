@@ -13,8 +13,11 @@ const htmlRoutes = require("./controllers/htmlController.js");
 app.use(apiRoutes);
 app.use(htmlRoutes);
 
+let server;
+
 db.sequelize.sync().then(function(){
-    app.listen(PORT, function() {
+    server = app.listen(PORT, function() {
+        require("./socketio/index.js")(server);
         console.log("App now listening at localhost:" + PORT);
     });
 });
