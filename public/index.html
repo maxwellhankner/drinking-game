@@ -6,15 +6,42 @@
     <title>Socket Client</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script defer src="assets/js/script.js" type="text/javascript"></script>
+    <script defer src="assets/js/socket.js" type="text/javascript"></script>
+    <script defer src="assets/js/interface.js" type="text/javascript"></script>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="world">
-        <p>Hello World</p>
+
+    <div class="landing-container">
+        <p>Welcome to the Drinking Game</p>
+        <button type="submit" id="join-game-button">JOIN GAME</button>
+        <button type="submit" id="edit-prompts-button">EDIT PROMPTS</button>
     </div>
-    
-    <input type="text" placeholder="name" id="name">
-    <button type="submit" class="send">SEND</button>
+
+    <div class="prompts-container">
+        <textarea type="text" placeholder="Enter new prompt here" id="new-prompt-text"></textarea>
+        <button type="submit" id="add-prompt-button">ADD PROMPT</button>
+        <button type="submit" id="back-to-landing">BACK</button>
+    </div>
+
+    <div class="username-container">
+        <input type="text" placeholder="username" id="username">
+        <button type="submit" id="start-button">JOIN</button>
+    </div>
+
+    <div class="game-container">
+        <div class="waiting-area">
+            <div class="players-list">
+            
+            </div>
+            <div class="start-with-players">
+                <button type="submit" id="start-with-players-button">LET'S GO</button>
+            </div>
+        </div>
+        <div class="view-prompt">
+            <p>interact with me</p>
+        </div>
+    </div>
+
 </body>
 </html>
