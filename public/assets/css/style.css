@@ -1,0 +1,25 @@
+/* Prompts Containter */
+.prompts-container {
+    display: none;
+}
+#new-prompt-text {
+    width: 200px;
+    height: 50px;
+}
+#add-prompt-button {
+    display: block;
+}
+
+/* Username Container */
+.username-container{
+    display: none;
+}
+
+/* Game Container */
+.game-container {
+    display: none;
+}
+
+.view-prompt {
+    display: none;
+}
