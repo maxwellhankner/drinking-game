@@ -8,6 +8,7 @@ module.exports = function(server){
   var allPlayers = [];
   var answerCount = 0;
   var currentAnswer = '';
+  var playerReadyCount = 0;
 
   io.on('connection', (socket) => {
     console.log('made socket connection', socket.id);
@@ -46,6 +47,14 @@ module.exports = function(server){
 
       if (answerCount === allPlayers.length) {
           io.sockets.emit('all-players-answered', currentAnswer)
+      }
+    })
+
+    socket.on('after-ready-button', function(){
+      playerReadyCount += 1;
+
+      if (playerReadyCount === allPlayers.length){
+        console.log('all players ready for next question')
       }
     })
 
