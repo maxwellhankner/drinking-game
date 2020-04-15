@@ -1,4 +1,6 @@
 function init(){
+    // Our answer
+    var ourAnswer;
     // Connect to server
     const socket = io('ws://localhost:8080');
     // Emit username
@@ -31,15 +33,41 @@ function init(){
         $('.prompt-text').append(prompt);
     })
 
+    afterResponse = $('.after-response')
+
     responseTrueButton = $('#response-true-button');
     responseTrueButton.click(function(){
-        console.log('true')
-        socket.emit('player-response-true', true);
+        ourAnswer = 'true';
+        socket.emit('player-response', 'true');
+        $('.view-prompt').hide();
+        var afterElement = $('<p>').text('Waiting for all players to answer...')
+        afterResponse.empty();
+        afterResponse.append(afterElement);
+        $('.after-response').show();
     })
+    
     responseFalseButton = $('#response-false-button');
     responseFalseButton.click(function(){
-        socket.emit('player-response-false', false);
+        ourAnswer = 'false';
+        socket.emit('player-response', 'false');
+        $('.view-prompt').hide();
+        var afterElement = $('<p>').text('Waiting for all players to answer...')
+        afterResponse.empty();
+        afterResponse.append(afterElement);
+        $('.after-response').show();
     })
 
+    socket.on('all-players-answered', function(data){
+        var checkedUserResponse;
+        if(data === ourAnswer){
+            checkedUserResponse = 'Correct, no need to drink.';
+        }
+        else{
+            checkedUserResponse = 'Wrong, cheers mate!'
+        }
+        var afterElement = $('<p>').text(checkedUserResponse)
+        afterResponse.empty();
+        afterResponse.append(afterElement);
+    })
 
 }

@@ -5,15 +5,17 @@ const Sequelize = require('sequelize');
 const db = require("../models");
 
 router.post("/api/new", function(req, res) {
-    db.Prompt.create({
-        text: req.body.text
-    })
-    .then((prompt) => {
-      res.json(prompt)
-    })
-    .catch((error) => {
-      res.status(500).json(error)
-    })
+  var answer = req.body.answer.toLowerCase();
+  db.Prompt.create({
+    text: req.body.text,
+    answer: answer
+  })
+  .then((prompt) => {
+    res.json(prompt)
+  })
+  .catch((error) => {
+    res.status(500).json(error)
+  })
 });
 
 

@@ -39,9 +39,17 @@ addPromptButton.click(function(){
     var newPromptText = $('#new-prompt-text');
     var promptText = newPromptText.val();
     newPromptText.val('');
+
+    var promptAnswerBoolean = $('#prompt-answer-boolean');
+    var userAnswer = promptAnswerBoolean.val();
+    promptAnswerBoolean.val('');
+
     $.ajax('/api/new', {
         type: 'POST',
-        data: {text: promptText}
+        data: {
+            text: promptText,
+            answer: userAnswer
+        }
     })
     .then(function(){
         console.log("submitted");

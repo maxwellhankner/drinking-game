@@ -20,6 +20,7 @@
 
     <div class="prompts-container">
         <textarea type="text" placeholder="Enter new prompt here" id="new-prompt-text"></textarea>
+        <input type="text" placeholder="true/false" id="prompt-answer-boolean">
         <button type="submit" id="add-prompt-button">ADD PROMPT</button>
         <button type="submit" id="back-to-landing">BACK</button>
     </div>
@@ -31,9 +32,7 @@
 
     <div class="game-container">
         <div class="waiting-area">
-            <div class="players-list">
-            
-            </div>
+            <div class="players-list"></div>
             <div class="start-with-players">
                 <button type="submit" id="start-with-players-button">LET'S GO</button>
             </div>
@@ -46,6 +45,8 @@
             </div>
 
         </div>
+        <!-- After the user has answered, and after everyone has answered -->
+        <div class="after-response"></div>
     </div>
 
 </body>
