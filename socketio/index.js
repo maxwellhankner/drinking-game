@@ -28,14 +28,22 @@ module.exports = function(server){
                 ]
             })
             .then(({text}) => {
+
                 io.sockets.emit('play-prompt', text);
-            })
-        })
 
-        socket.on('player-response-true', function(data){
-            playerResponses.push({username: username, response: data})
-            console.log(playerResponses)
-        })
+                console.log('Players: '+ allPlayers.length, 'Responses: ' + playerResponses.length) //Displays 1 0 since no responses have been sent. 
+            });
 
+            socket.on('player-response-true', function(data){
+                console.log('player response true')
+                playerResponses.push({username: username, response: data}) 
+                console.log('Players: '+ allPlayers.length, 'Responses: ' + playerResponses.length)
+                
+                if (allPlayers.length === playerResponses.length){
+                    console.log('All players have responded') 
+                };                   
+            });
+
+        });        
     });
 }

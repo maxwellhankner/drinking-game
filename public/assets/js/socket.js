@@ -1,6 +1,6 @@
 function init(){
     // Connect to server
-    const socket = io('ws://localhost:8080');
+    const socket = io('http://localhost:8080');
     // Emit username
     var username = $('#username').val();
     $('#username').val('');
@@ -31,15 +31,28 @@ function init(){
         $('.prompt-text').append(prompt);
     })
 
+    var myResponse;
+
     responseTrueButton = $('#response-true-button');
     responseTrueButton.click(function(){
-        console.log('true')
-        socket.emit('player-response-true', true);
+        myResponse = 'true';
+        socket.emit('player-response-true', myResponse);
     })
     responseFalseButton = $('#response-false-button');
     responseFalseButton.click(function(){
-        socket.emit('player-response-false', false);
+        myResponse = 'false';
+        socket.emit('player-response-false', myResponse);
     })
 
+    socket.on('received-all-responses', function(data){
+        console.log('received all responses')
+        if (myResponse === data){
+            $('.promptResponses').attr('style', 'display: none');
+            $('.prompt-text').empty();
+            let drink = $('<p>').text('You got it correct! Do not drink.');
+            $('.prompt-text').append(prompt);    
+            
+        }
+    })
 
 }
