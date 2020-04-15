@@ -26,6 +26,11 @@ function init(){
 
     // Play prompt
     socket.on('play-prompt', function(data){
+        // Reset Interface
+        $('.after-response').hide();
+        $('#after-ready-button').show();
+
+        // Play the given prompt
         $('.waiting-area').attr('style', 'display: none');
         $('.view-prompt').attr('style', 'display: block');
         $('.prompt-text').empty();
@@ -44,7 +49,7 @@ function init(){
         var afterElement = $('<p>').text('Waiting for all players to answer...')
         afterResponseText.empty();
         afterResponseText.append(afterElement);
-        $('.after-response').show();
+        afterResponse.show();
     })
     
     

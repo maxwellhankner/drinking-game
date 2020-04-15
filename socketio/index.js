@@ -13,8 +13,6 @@ module.exports = function(server){
   io.on('connection', (socket) => {
     console.log('made socket connection', socket.id);
     
-
-
     socket.on('new-player', function(data){
         allPlayers.push({username: data, userId: socket.id, answer: null});
         var nameList = getNameList(allPlayers);
@@ -24,19 +22,11 @@ module.exports = function(server){
     });
 
     socket.on('start-with-players', function(){
-        db.Prompt.findOne({
-            order: [
-              Sequelize.fn( 'RAND' ),
-            ]
-        })
-        .then(({text, answer}) => {
-          currentAnswer = answer;
-            io.sockets.emit('play-prompt', text);
-        })
+        emitRandomPrompt();
     })
 
     socket.on('player-response', function(data){
-
+      
       for (var i = 0; i < allPlayers.length; i++){
         if (socket.io === allPlayers[i].userId){
           allPlayers[i].answer = data;
@@ -52,11 +42,31 @@ module.exports = function(server){
 
     socket.on('after-ready-button', function(){
       playerReadyCount += 1;
-
+      
       if (playerReadyCount === allPlayers.length){
         console.log('all players ready for next question')
+        resetForNextPrompt();
+        emitRandomPrompt();
       }
     })
+
+    function emitRandomPrompt(){
+      db.Prompt.findOne({
+        order: [
+          Sequelize.fn( 'RAND' ),
+        ]
+      })
+      .then(({text, answer}) => {
+      currentAnswer = answer;
+        io.sockets.emit('play-prompt', text);
+      })
+    }
+
+    function resetForNextPrompt(){
+      answerCount = 0;
+      currentAnswer = '';
+      playerReadyCount = 0;
+    }
 
   });
 }
@@ -69,3 +79,7 @@ function getNameList(array){
   }
   return newArray;
 }
+
+
+
+
