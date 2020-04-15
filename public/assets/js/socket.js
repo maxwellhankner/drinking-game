@@ -1,5 +1,4 @@
 function init(){
-    console.log(window.origin)
     // Our answer
     var ourAnswer;
     // Connect to server
@@ -8,7 +7,7 @@ function init(){
     // if (process.env.PORT){
     //     console.log('there is an env port')
     // }
-    const socket = io('https://glacial-cliffs-64796.herokuapp.com/');
+    const socket = io(window.origin);
     // Emit username
     var username = $('#username').val();
     $('#username').val('');
