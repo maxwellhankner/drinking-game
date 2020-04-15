@@ -2,7 +2,10 @@ function init(){
     // Our answer
     var ourAnswer;
     // Connect to server
-    const socket = io('ws://localhost:8080');
+    // const PORT = process.env.PORT || 8080;
+    // const Connection = process.env.PORT || 'http://localhost:8080';
+
+    const socket = io('http://localhost:8080');
     // Emit username
     var username = $('#username').val();
     $('#username').val('');
@@ -84,6 +87,17 @@ function init(){
     afterReadyButton.click(function(){
         socket.emit('after-ready-button', 'READY');
         afterReadyButton.hide();
+    })
+
+    afterEndButton = $('#after-end-button');
+    afterEndButton.click(function(){
+        socket.emit('after-end-button', 'The game has ended');
+        console.log('reset page')
+    })
+
+    socket.on('end-game', function(){
+        window.location.reload();
+        return false;
     })
 
 }
