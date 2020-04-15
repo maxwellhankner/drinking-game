@@ -26,6 +26,11 @@ function init(){
 
     // Play prompt
     socket.on('play-prompt', function(data){
+        // Reset Interface
+        $('.after-response').hide();
+        $('#after-ready-button').show();
+
+        // Play the given prompt
         $('.waiting-area').attr('style', 'display: none');
         $('.view-prompt').attr('style', 'display: block');
         $('.prompt-text').empty();
@@ -33,18 +38,20 @@ function init(){
         $('.prompt-text').append(prompt);
     })
 
-    afterResponse = $('.after-response')
-
+    afterResponse = $('.after-response');
+    afterResponseText = $('.after-response-text');
     responseTrueButton = $('#response-true-button');
+
     responseTrueButton.click(function(){
         ourAnswer = 'true';
         socket.emit('player-response', 'true');
         $('.view-prompt').hide();
         var afterElement = $('<p>').text('Waiting for all players to answer...')
-        afterResponse.empty();
-        afterResponse.append(afterElement);
-        $('.after-response').show();
+        afterResponseText.empty();
+        afterResponseText.append(afterElement);
+        afterResponse.show();
     })
+    
     
     responseFalseButton = $('#response-false-button');
     responseFalseButton.click(function(){
@@ -52,12 +59,15 @@ function init(){
         socket.emit('player-response', 'false');
         $('.view-prompt').hide();
         var afterElement = $('<p>').text('Waiting for all players to answer...')
-        afterResponse.empty();
-        afterResponse.append(afterElement);
+        afterResponseText.empty();
+        afterResponseText.append(afterElement);
         $('.after-response').show();
     })
+    
+    afterResponseNext = $('.after-response-next');
 
     socket.on('all-players-answered', function(data){
+        afterResponseNext.show();
         var checkedUserResponse;
         if(data === ourAnswer){
             checkedUserResponse = 'Correct, no need to drink.';
@@ -66,8 +76,14 @@ function init(){
             checkedUserResponse = 'Wrong, cheers mate!'
         }
         var afterElement = $('<p>').text(checkedUserResponse)
-        afterResponse.empty();
-        afterResponse.append(afterElement);
+        afterResponseText.empty();
+        afterResponseText.append(afterElement);
+    })
+
+    afterReadyButton = $('#after-ready-button');
+    afterReadyButton.click(function(){
+        socket.emit('after-ready-button', 'READY');
+        afterReadyButton.hide();
     })
 
 }

@@ -30,3 +30,7 @@
 .after-response {
     display: none;
 }
+
+.after-response-next {
+    display: none;
+}
