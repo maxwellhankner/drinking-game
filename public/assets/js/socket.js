@@ -8,7 +8,7 @@ function init(){
     // if (process.env.PORT){
     //     console.log('there is an env port')
     // }
-    const socket = io('http://localhost:8080');
+    const socket = io('https://glacial-cliffs-64796.herokuapp.com/');
     // Emit username
     var username = $('#username').val();
     $('#username').val('');
