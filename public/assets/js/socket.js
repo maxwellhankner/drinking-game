@@ -1,5 +1,5 @@
 function init(){
-    console.log(window)
+    console.log(window.origin)
     // Our answer
     var ourAnswer;
     // Connect to server
