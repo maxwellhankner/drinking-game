@@ -50,6 +50,14 @@ module.exports = function(server){
       }
     })
 
+    socket.on('after-end-button', function(){
+      console.log('server ended game')
+      
+      io.sockets.emit('end-game', 'The game has ended')
+      allPlayers = [];
+      // reset the server      
+    })
+
     function emitRandomPrompt(){
       db.Prompt.findOne({
         order: [
@@ -79,6 +87,7 @@ function getNameList(array){
   }
   return newArray;
 }
+
 
 
 
