@@ -9,6 +9,8 @@ module.exports = function(server){
   var answerCount = 0;
   var currentAnswer = '';
   var playerReadyCount = 0;
+  var topResponsesArray = [];
+  
 
   io.on('connection', (socket) => {
     console.log('made socket connection', socket.id);
@@ -26,9 +28,49 @@ module.exports = function(server){
     })
 
     socket.on('player-response', function(data){
-      
+      console.log(data);
+      console.log(currentAnswer);
+      if(data === 'true' || data === 'false'){
+        for (var i = 0; i < allPlayers.length; i++){
+          if (socket.id === allPlayers[i].userId){
+            allPlayers[i].answer = data;
+          }
+        }
+  
+        answerCount += 1;
+  
+        if (answerCount === allPlayers.length) {
+          
+            io.sockets.emit('all-players-answered', currentAnswer)
+        }
+      }
+      else {
+        topResponsesArray.push(data);
+        for (var i = 0; i < allPlayers.length; i++){
+          if (socket.id === allPlayers[i].userId){
+            allPlayers[i].answer = data;
+          }
+        }
+
+        answerCount += 1;
+  
+        if (answerCount === allPlayers.length) {
+          var winnerResponse = getWinners(topResponsesArray);
+          for (var i = 0; i < allPlayers.length; i++){
+            if (allPlayers[i].answer === winnerResponse){
+              var theWinner = allPlayers[i].username
+            }
+          }
+          io.sockets.emit('all-players-answered', theWinner)
+        }
+      }
+    })
+
+    socket.on('player-response-open-text', function(data){
+      console.log(allPlayers.length)
       for (var i = 0; i < allPlayers.length; i++){
-        if (socket.io === allPlayers[i].userId){
+        console.log(socket.id)
+        if (socket.id === allPlayers[i].userId){
           allPlayers[i].answer = data;
         }
       }
@@ -36,7 +78,11 @@ module.exports = function(server){
       answerCount += 1;
 
       if (answerCount === allPlayers.length) {
-          io.sockets.emit('all-players-answered', currentAnswer)
+        // Reset
+        answerCount = 0;
+        // Create all responses array
+        var playerAnswers = getAllOpenResponseList(allPlayers);
+        io.sockets.emit('all-players-responded-open', playerAnswers);
       }
     })
 
@@ -47,6 +93,7 @@ module.exports = function(server){
         console.log('all players ready for next question')
         resetForNextPrompt();
         emitRandomPrompt();
+        console.log('reset jsut happened')
       }
     })
 
@@ -67,7 +114,12 @@ module.exports = function(server){
       })
       .then(({text, answer}) => {
         currentAnswer = answer;
-        io.sockets.emit('play-prompt', text);        
+        if(answer === 'open'){
+          io.sockets.emit('play-open-prompt', text);
+        }
+        else {
+          io.sockets.emit('play-boolean-prompt', text);  
+        }      
       })
     }
 
@@ -75,6 +127,7 @@ module.exports = function(server){
       answerCount = 0;
       currentAnswer = '';
       playerReadyCount = 0;
+      topResponsesArray = [];
     }
 
   });
@@ -89,7 +142,37 @@ function getNameList(array){
   return newArray;
 }
 
+function getAllOpenResponseList(array){
+  var newArray = [];
+  for (var i = 0; i < array.length; i++){
+    newArray.push(array[i].answer);
+  }
+  return newArray;
+}
 
+function getWinners(responsesArray){
+  // figure out the top response(s)
+  var mostOften = findMode(responsesArray);
+  // push those players in the returned array
+  return mostOften;
+}
 
-
+function findMode(arr){
+    var numMapping = {};
+    for(var i = 0; i < arr.length; i++){
+        if(numMapping[arr[i]] === undefined){
+            numMapping[arr[i]] = 0;
+        }        
+            numMapping[arr[i]] += 1;
+    }
+    var greatestFreq = 0;
+    var mode;
+    for(var prop in numMapping){
+        if(numMapping[prop] > greatestFreq){
+            greatestFreq = numMapping[prop];
+            mode = prop;
+        }
+    }
+    return mode;
+}
 

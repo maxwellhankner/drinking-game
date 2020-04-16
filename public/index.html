@@ -20,7 +20,7 @@
 
     <div class="prompts-container">
         <textarea type="text" placeholder="Enter new prompt here" id="new-prompt-text"></textarea>
-        <input type="text" placeholder="true/false" id="prompt-answer-boolean">
+        <input type="text" placeholder="true/false/open" id="prompt-answer-boolean">
         <button type="submit" id="add-prompt-button">ADD PROMPT</button>
         <button type="submit" id="back-to-landing">BACK</button>
     </div>
@@ -40,10 +40,14 @@
         <div class="view-prompt">
             <div class="prompt-text"></div>
             <div class="prompt-responses">
-                <button type="submit" id="response-true-button">TRUE</button>
-                <button type="submit" id="response-false-button">FALSE</button>
+                <button type="submit" id="response-true-button" class="response-button">TRUE</button>
+                <button type="submit" id="response-false-button" class="response-button">FALSE</button>
             </div>
-
+            <div class="prompt-response-open">
+                <input type="text" placeholder="something funny" id="response-open-text">
+                <button type="submit" id="response-open-button">SUBMIT</button>
+            </div>
+            <div class="all-open-responses"></div>
         </div>
         <!-- After the user has answered, and after everyone has answered -->
         <div class="after-response">

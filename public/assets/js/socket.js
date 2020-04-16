@@ -1,3 +1,5 @@
+// import { response } from "express";
+
 function init(){
     // Our answer
     var ourAnswer;
@@ -29,11 +31,13 @@ function init(){
         socket.emit('start-with-players', 'lets go');
     })
 
-    // Play prompt
-    socket.on('play-prompt', function(data){
+    // Play boolean prompt
+    socket.on('play-boolean-prompt', function(data){
         // Reset Interface
         $('.after-response').hide();
         $('#after-ready-button').show();
+        $('.prompt-responses').show();
+        $('.prompt-response-open').hide();
 
         // Play the given prompt
         $('.waiting-area').attr('style', 'display: none');
@@ -43,46 +47,86 @@ function init(){
         $('.prompt-text').append(prompt);
     })
 
+    // Play open prompt
+    socket.on('play-open-prompt', function(data){
+        // Reset Interface
+        $('.after-response').hide();
+        $('#after-ready-button').show();
+        $('.prompt-responses').hide();
+        $('.prompt-response-open').show();
+
+        // Play the given prompt
+        $('.waiting-area').attr('style', 'display: none');
+        $('.view-prompt').attr('style', 'display: block');
+        $('.prompt-text').empty();
+        let prompt = $('<p>').text(data);
+        $('.prompt-text').append(prompt);
+    })
+
+    // Event listener for submitting open response text
+    responseOpenButton = $('#response-open-button');
+    responseOpenText = $('#response-open-text');
+    responseOpenButton.click(function(){
+        var response = responseOpenText.val();
+        responseOpenText.val('');
+        socket.emit('player-response-open-text', response);
+        $('.prompt-response-open').hide();
+    })
+
+    socket.on('all-players-responded-open', function(data){
+        $('.all-open-responses').show();
+        $('.all-open-responses').empty();
+        for(var i = 0; i < data.length; i++){
+            var openElement = $('<button>');
+            openElement.text(data[i]);
+            openElement.addClass('response-button');
+            $('.all-open-responses').append(openElement);
+            $('.after-response-next').hide();
+        }
+    })
+
     afterResponse = $('.after-response');
     afterResponseText = $('.after-response-text');
     responseTrueButton = $('#response-true-button');
 
-    responseTrueButton.click(function(){
-        ourAnswer = 'true';
-        socket.emit('player-response', 'true');
-        $('.view-prompt').hide();
-        var afterElement = $('<p>').text('Waiting for all players to answer...')
-        afterResponseText.empty();
-        afterResponseText.append(afterElement);
-        afterResponse.show();
-    })
-    
-    
-    responseFalseButton = $('#response-false-button');
-    responseFalseButton.click(function(){
-        ourAnswer = 'false';
-        socket.emit('player-response', 'false');
+    responseButton = $('.response-button');
+    gameContainer.on('click', '.response-button', function(){
+        var response = $(this).text().toLowerCase();
+        ourAnswer = response;
+        socket.emit('player-response', response);
         $('.view-prompt').hide();
         var afterElement = $('<p>').text('Waiting for all players to answer...')
         afterResponseText.empty();
         afterResponseText.append(afterElement);
         $('.after-response').show();
+        $('.after-response-next').hide();
     })
     
     afterResponseNext = $('.after-response-next');
 
     socket.on('all-players-answered', function(data){
-        afterResponseNext.show();
-        var checkedUserResponse;
-        if(data === ourAnswer){
-            checkedUserResponse = 'Correct, no need to drink.';
+        $('.all-open-responses').hide();
+        if (data === 'true' || data === 'false'){
+            afterResponseNext.show();
+            var checkedUserResponse;
+            console.log(data);
+            console.log('our: ' + ourAnswer);
+            if(data === ourAnswer){
+                checkedUserResponse = 'Correct, no need to drink.';
+            }
+            else{
+                checkedUserResponse = 'Wrong, cheers mate!'
+            }
+            var afterElement = $('<p>').text(checkedUserResponse)
+            afterResponseText.empty();
+            afterResponseText.append(afterElement);
         }
-        else{
-            checkedUserResponse = 'Wrong, cheers mate!'
+        else {
+            var afterElement = $('<p>').text(data + " gives out a drink.")
+            afterResponseText.empty();
+            afterResponseText.append(afterElement);
+            afterResponseNext.show();
         }
-        var afterElement = $('<p>').text(checkedUserResponse)
-        afterResponseText.empty();
-        afterResponseText.append(afterElement);
     })
 
     afterReadyButton = $('#after-ready-button');
