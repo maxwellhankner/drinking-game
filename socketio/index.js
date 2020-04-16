@@ -65,9 +65,9 @@ module.exports = function(server){
           Sequelize.fn( 'RAND' ),
         ]
       })
-      .then(({text, answer}) => {
-      currentAnswer = answer;
-        io.sockets.emit('play-prompt', text);
+      .then(({id, text, answer}) => {
+        currentAnswer = answer;
+        io.sockets.emit('play-prompt', text);        
       })
     }
 
