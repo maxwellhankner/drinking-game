@@ -1,20 +1,6 @@
--- Drops the blogger if it exists currently --
-DROP DATABASE IF EXISTS materials_db;
--- Creates the "blogger" database --
-CREATE DATABASE materials_db;
+USE apm5oe9jsj5tdj7x;
 
-USE materials_db;
-
-CREATE TABLE prompts (
-  id INT NOT NULL AUTO_INCREMENT,
-  text VARCHAR(120) NOT NULL,
-  answer VARCHAR(5),
-  createdAt VARCHAR(30),
-  updatedAt VARCHAR(30),
-  PRIMARY KEY(id)
-);
-
-INSERT INTO prompts (text, answer)
+INSERT INTO Prompts (text, answer)
 VALUES ('Eurobeat is primarily an Italian genre of music', 'true'),
 ('Nutella is produced by the German company Ferrero', 'false'),
 ('The colors of the pils in The Matrix were blue and yellow', 'false'),
