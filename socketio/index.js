@@ -66,8 +66,8 @@ module.exports = function(server){
         ]
       })
       .then(({text, answer}) => {
-      currentAnswer = answer;
-        io.sockets.emit('play-prompt', text);
+        currentAnswer = answer;
+        io.sockets.emit('play-prompt', text);        
       })
     }
 
