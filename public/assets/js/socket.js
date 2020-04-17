@@ -3,12 +3,7 @@
 function init(){
     // Our answer
     var ourAnswer;
-    // Connect to server
-    // const PORT = process.env.PORT || 8080;
-    // const Connection = process.env.PORT || 'http://localhost:8080';
-    // if (process.env.PORT){
-    //     console.log('there is an env port')
-    // }
+
     const socket = io(window.origin);
     // Emit username
     var username = $('#username').val();
