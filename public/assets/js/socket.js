@@ -3,12 +3,7 @@
 function init(){
     // Our answer
     var ourAnswer;
-    // Connect to server
-    // const PORT = process.env.PORT || 8080;
-    // const Connection = process.env.PORT || 'http://localhost:8080';
-    // if (process.env.PORT){
-    //     console.log('there is an env port')
-    // }
+
     const socket = io(window.origin);
     // Emit username
     var username = $('#username').val();
@@ -77,10 +72,12 @@ function init(){
         $('.all-open-responses').show();
         $('.all-open-responses').empty();
         for(var i = 0; i < data.length; i++){
+            var buttonDiv = $('<div>');
             var openElement = $('<button>');
             openElement.text(data[i]);
             openElement.addClass('response-button btn btn-dark');
-            $('.all-open-responses').append(openElement);
+            buttonDiv.append(openElement)
+            $('.all-open-responses').append(buttonDiv);
             $('.after-response-next').hide();
         }
     })
