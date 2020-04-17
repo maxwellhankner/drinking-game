@@ -10,6 +10,7 @@ module.exports = function(server){
   var currentAnswer = '';
   var playerReadyCount = 0;
   var topResponsesArray = [];
+  var usedPromptArray = [];
   
 
   io.on('connection', (socket) => {
@@ -24,6 +25,7 @@ module.exports = function(server){
     });
 
     socket.on('start-with-players', function(){
+        usedPromptArray = [];
         emitRandomPrompt();
     })
 
@@ -106,22 +108,59 @@ module.exports = function(server){
       // reset the server      
     })
 
+
     function emitRandomPrompt(){
       db.Prompt.findOne({
         order: [
           Sequelize.fn( 'RAND' ),
         ]
       })
-      .then(({text, answer}) => {
-        currentAnswer = answer;
-        if(answer === 'open'){
-          io.sockets.emit('play-open-prompt', text);
-        }
-        else {
-          io.sockets.emit('play-boolean-prompt', text);  
-        }      
+      .then(({id, text, answer}) => {
+        checkIfUsed(id, text, answer, usedPromptArray)
       })
     }
+
+    function checkIfUsed(id, text, answer, usedPromptArray){
+      var currentPromptId = id;
+      
+      if (usedPromptArray.includes(currentPromptId)){
+        console.log('duplicate')
+        emitRandomPrompt();
+        console.log('DUPLICATE, RENDER ANOTHER PROMPT')
+      } else if (answer === 'boolean'){
+        usedPromptArray.push(currentPromptId)
+        io.sockets.emit('play-boolean-prompt', text);
+       console.log('from boolean ' + usedPromptArray)
+      } else {
+        usedPromptArray.push(currentPromptId)
+        io.sockets.emit('play-open-prompt', text);
+       console.log('from open ' + usedPromptArray)  
+      }
+    }
+
+
+      // if (currentPromptId !== usedPromptCheckValue){
+      //   usedPromptArray.push(currentPromptId);
+      //   currentAnswer = answer;
+      //   if(answer === 'open'){
+      //     io.sockets.emit('play-open-prompt', text);
+      //   }
+      //   else {
+      //     io.sockets.emit('play-boolean-prompt', text);  
+      //   }      
+      // } 
+      // else {
+
+
+      // }
+      // console.log(currentPromptId)
+      // if (currentPromptId === usedPromptArray[i]){
+      // console.log('already used')
+      // }
+      
+    
+  
+  
 
     function resetForNextPrompt(){
       answerCount = 0;

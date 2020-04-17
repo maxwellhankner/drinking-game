@@ -19,5 +19,6 @@ db.sequelize.sync().then(function(){
     server = app.listen(PORT, function() {
         require("./socketio/index.js")(server);
         console.log("App now listening at localhost:" + PORT);
+        
     });
 });
