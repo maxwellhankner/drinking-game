@@ -129,14 +129,14 @@ module.exports = function(server){
               emitRandomPrompt();
         }   // Handles a boolean prompt
         else if (answer === 'true' || answer === 'false'){
-              usedPromptArray.push(currentPromptId)
+              usedPromptArray.push(currentPromptId);
               console.log('Current prompt id ' + currentPromptId)
               console.log('usedPromptArray length ' + usedPromptArray.length)
               io.sockets.emit('play-boolean-prompt', text);
               checkUsedPromptArrayLength();
         } 
         else { // Handles an open prompt
-              usedPromptArray.push(currentPromptId)
+              usedPromptArray.push(currentPromptId);
               console.log('Current prompt id ' + currentPromptId)
               console.log('usedPromptArray length ' + usedPromptArray.length)
               io.sockets.emit('play-open-prompt', text);
@@ -145,6 +145,7 @@ module.exports = function(server){
     }
 
     // Checks the length of the usedPromptArray, if the array length = ?, release index 0 back to the available prompt pool.
+    // This function will allow the game to run indefinitely while preventing a prompt from re-appearing too often.
     function checkUsedPromptArrayLength(){
         if (usedPromptArray.length === 4){
             console.log('usedPromptArray length BEFORE shift ' + usedPromptArray)
