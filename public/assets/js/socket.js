@@ -119,10 +119,8 @@ function init(){
             afterResponseText.append(afterElement);
         }
         else {
-            while(data === null){
-
-            }
-            var afterElement = $('<p>').text(data + " gives out a drink.")
+            var afterElement = $('<p>');
+            afterElement.text(data + " gives out a drink.")
             afterResponseText.empty();
             afterResponseText.append(afterElement);
             
