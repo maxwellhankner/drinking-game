@@ -123,11 +123,11 @@ module.exports = function(server){
 
     function checkIfUsed(id, text, answer){
       var currentPromptId = id;
-        // Looks through the usedPromptsArray to see if the currentPromptId exits within the array.
+        // Looks through the usedPromptArray to see if the currentPromptId exists within the usedPromptArray.
       if (usedPromptArray.includes(currentPromptId)){
           console.log('ALREADY SHOWN, RENDER ANOTHER PROMPT')
           emitRandomPrompt();
-      }   // If the currentPromptId was not found in the usedPromptArray go to L:131
+      }   // Handles a boolean prompt
       else if (answer === 'true' || answer === 'false'){
           usedPromptArray.push(currentPromptId)
           console.log('Current prompt id ' + currentPromptId)
@@ -135,7 +135,7 @@ module.exports = function(server){
           io.sockets.emit('play-boolean-prompt', text);
           checkUsedPromptArrayLength();
       } 
-      else {
+      else { // Handles an open prompt
           usedPromptArray.push(currentPromptId)
           console.log('Current prompt id ' + currentPromptId)
           console.log('usedPromptArray length ' + usedPromptArray.length)
