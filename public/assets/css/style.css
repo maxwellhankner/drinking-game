@@ -1,16 +1,53 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #fdc350;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#beer-foam {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+/* Bootstrap */
+.container-fluid {
+    max-width: 500px;
+}
+
+.btn {
+    width: 100%;
+    /* display: block; */
+}
+
+/* Landing container */
+.landing-container div {
+    margin: 10px;
+}
+
 /* Prompts Containter */
 .prompts-container {
     display: none;
 }
+.prompts-container div {
+    margin: 10px;
+}
 #new-prompt-text {
-    width: 200px;
-    height: 50px;
+    width: 100%;
+    height: 100px;
 }
 #add-prompt-button {
     display: block;
 }
 #prompt-answer-boolean {
     display: block;
+    width: 100%;
 }
 
 /* Username Container */
@@ -18,9 +55,21 @@
     display: none;
 }
 
+.username-container div {
+    margin: 10px;
+}
+
+#username {
+    width: 100%;
+}
+
 /* Game Container */
 .game-container {
     display: none;
+}
+
+.game-container div {
+    margin: 10px;
 }
 
 .view-prompt {

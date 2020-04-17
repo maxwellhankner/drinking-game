@@ -79,7 +79,7 @@ function init(){
         for(var i = 0; i < data.length; i++){
             var openElement = $('<button>');
             openElement.text(data[i]);
-            openElement.addClass('response-button');
+            openElement.addClass('response-button btn btn-dark');
             $('.all-open-responses').append(openElement);
             $('.after-response-next').hide();
         }
