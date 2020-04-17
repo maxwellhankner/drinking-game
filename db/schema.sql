@@ -43,7 +43,6 @@ VALUES
 ('"You are pulled over by the police, and the officer is arresting your passenger for unruly conduct." _____ is your passenger.', 'open'),
 ('"The real name of Lady Gaga is Stefani Joanne Angelina Germanotta."', 'true'),
 ('"The average woman is 5 inches shorter than the average man."', 'true'),
-('"The person to your RIGHT is an animal, what is that animal?"', 'open'),
 ('"The surface area of Russia is slightly larger than that of the dwarf planet Pluto."', 'true'),
 ('"Kangaroos keep food in their pouches nex to their offspring."', 'false'),
 ('"Man, this is BS, screw _____."', 'open'),
