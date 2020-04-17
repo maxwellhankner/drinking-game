@@ -130,15 +130,15 @@ module.exports = function(server){
       } 
       else if (answer === 'true' || answer === 'false'){
           usedPromptArray.push(currentPromptId)
-          console.log('current prompt id ' + currentPromptId)
-          console.log('arr length ' + usedPromptArray.length)
+          console.log('Current prompt id ' + currentPromptId)
+          console.log('usedPromptArray length ' + usedPromptArray.length)
           io.sockets.emit('play-boolean-prompt', text);
           checkUsedPromptArrayLength();
       } 
       else {
           usedPromptArray.push(currentPromptId)
-          console.log('current prompt id ' + currentPromptId)
-          console.log('arr length ' + usedPromptArray.length)
+          console.log('Current prompt id ' + currentPromptId)
+          console.log('usedPromptArray length ' + usedPromptArray.length)
           io.sockets.emit('play-open-prompt', text);
           checkUsedPromptArrayLength();
       }
@@ -147,9 +147,9 @@ module.exports = function(server){
 
     function checkUsedPromptArrayLength(){
         if (usedPromptArray.length === 4){
-            console.log('Array BEFORE shift ' + usedPromptArray)
+            console.log('usedPromptArray length BEFORE shift ' + usedPromptArray)
             usedPromptArray.shift();
-            console.log('Array AFTER shift ' + usedPromptArray)
+            console.log('usedPromptArray length AFTER shift ' + usedPromptArray)
         }
     }
 
