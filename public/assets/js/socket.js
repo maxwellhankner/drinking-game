@@ -72,10 +72,12 @@ function init(){
         $('.all-open-responses').show();
         $('.all-open-responses').empty();
         for(var i = 0; i < data.length; i++){
+            var buttonDiv = $('<div>');
             var openElement = $('<button>');
             openElement.text(data[i]);
             openElement.addClass('response-button btn btn-dark');
-            $('.all-open-responses').append(openElement);
+            buttonDiv.append(openElement)
+            $('.all-open-responses').append(buttonDiv);
             $('.after-response-next').hide();
         }
     })

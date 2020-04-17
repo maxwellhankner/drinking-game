@@ -40,18 +40,22 @@ addPromptButton.click(function(){
     var promptText = newPromptText.val();
     newPromptText.val('');
 
-    var promptAnswerBoolean = $('#prompt-answer-boolean');
-    var userAnswer = promptAnswerBoolean.val();
-    promptAnswerBoolean.val('');
+    var promptType = getActivePromptType();
 
     $.ajax('/api/new', {
         type: 'POST',
         data: {
             text: promptText,
-            answer: userAnswer
+            answer: promptType
         }
     })
     .then(function(){
         console.log("submitted");
     })
 })
+
+function getActivePromptType(){
+    var answer;
+    answer = $('.active').attr('id');
+    return answer;
+}

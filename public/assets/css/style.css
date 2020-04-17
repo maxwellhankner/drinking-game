@@ -10,6 +10,11 @@ body {
     justify-content: center;
 }
 
+p {
+    margin: 10px;
+    font-size: 20px;
+}
+
 #beer-foam {
     position: fixed;
     top: 0;
@@ -24,6 +29,11 @@ body {
 .btn {
     width: 100%;
     /* display: block; */
+}
+.btn-group {
+    width: 100%;
+    margin: 0px !important;
+
 }
 
 /* Landing container */
@@ -83,3 +93,11 @@ body {
 .after-response-next {
     display: none;
 }
+
+#response-open-text {
+    width: 100%;
+}
+
+/* .all-open-responses {
+    margin: 10px;
+} */
