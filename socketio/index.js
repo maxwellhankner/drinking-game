@@ -30,8 +30,8 @@ module.exports = function(server){
     })
 
     socket.on('player-response', function(data){
-      console.log(data);
-      console.log(currentAnswer);
+      // console.log(data);
+      // console.log(currentAnswer);
       if(data === 'true' || data === 'false'){
         for (var i = 0; i < allPlayers.length; i++){
           if (socket.id === allPlayers[i].userId){
@@ -40,9 +40,10 @@ module.exports = function(server){
         }
   
         answerCount += 1;
-  
+
         if (answerCount === allPlayers.length) {
-          
+          console.log('current answer' + currentAnswer)
+
             io.sockets.emit('all-players-answered', currentAnswer)
         }
       }
@@ -71,7 +72,6 @@ module.exports = function(server){
     socket.on('player-response-open-text', function(data){
       console.log(allPlayers.length)
       for (var i = 0; i < allPlayers.length; i++){
-        console.log(socket.id)
         if (socket.id === allPlayers[i].userId){
           allPlayers[i].answer = data;
         }
@@ -116,12 +116,13 @@ module.exports = function(server){
         ]
       })
       .then(({id, text, answer}) => {
+          currentAnswer = answer;
           checkIfUsed(id, text, answer)
       })
     }
 
-
     function checkIfUsed(id, text, answer){
+        console.log('CHECKIFUSED ' + answer)
         var currentPromptId = id;
           // Looks for the currentPromptId within the usedPromptArray
         if (usedPromptArray.includes(currentPromptId)){
@@ -143,15 +144,14 @@ module.exports = function(server){
               checkUsedPromptArrayLength();
         }
     }
-
-    // Checks the length of the usedPromptArray, if the array length = ?, release index 0 back to the available prompt pool.
+    // Checks the length of the usedPromptArray, if the array length reaches a set amount, release index 0 back to the available prompt pool.
     // This function will allow the game to run indefinitely while preventing a prompt from re-appearing too often.
     function checkUsedPromptArrayLength(){
-        if (usedPromptArray.length === 49){
-            console.log('usedPromptArray length BEFORE shift ' + usedPromptArray)
-            // Removes index 0 of the usedPromptArray
-            usedPromptArray.shift();
-            console.log('usedPromptArray length AFTER shift ' + usedPromptArray)
+        if (usedPromptArray.length === 4){
+            console.log('usedPromptArray BEFORE shift ' + usedPromptArray)
+            usedPromptArray.shift();  // Removes index 0 of the usedPromptArray
+
+            console.log('usedPromptArray AFTER shift ' + usedPromptArray)
         }
     }
 

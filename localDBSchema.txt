@@ -1,4 +1,23 @@
+-- FOR PRODUCTION SCHEMA--
 USE apm5oe9jsj5tdj7x;
+
+
+--IN SCHEMA.SQL, COMMENT THE EXISTING USE AND INSERT THE BELOW CODE TO TEST WITH LOCAL DATABASE--
+
+DROP DATABASE IF EXISTS materials_db;
+
+CREATE DATABASE materials_db;
+
+USE materials_db;
+
+CREATE TABLE Prompts (
+  id INT NOT NULL AUTO_INCREMENT,
+  text VARCHAR(200) NOT NULL,
+  answer VARCHAR(5),
+  createdAt VARCHAR(30),
+  updatedAt VARCHAR(30),
+  PRIMARY KEY(id)
+);
 
 INSERT INTO Prompts (text, answer)
 VALUES
@@ -62,4 +81,7 @@ VALUES
 ('"2Pac died from complications being stabbed in 1996."', 'false'),
 ('"Before _____, all we had was _____."', 'open'),
 ('"Sound can travel through a vacuum."', 'false')
+
+
+
 
