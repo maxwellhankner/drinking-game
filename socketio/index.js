@@ -147,7 +147,7 @@ module.exports = function(server){
     // Checks the length of the usedPromptArray, if the array length = ?, release index 0 back to the available prompt pool.
     // This function will allow the game to run indefinitely while preventing a prompt from re-appearing too often.
     function checkUsedPromptArrayLength(){
-        if (usedPromptArray.length === 4){
+        if (usedPromptArray.length === 50){
             console.log('usedPromptArray length BEFORE shift ' + usedPromptArray)
             // Removes index 0 of the usedPromptArray
             usedPromptArray.shift();
