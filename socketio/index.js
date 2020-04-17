@@ -40,7 +40,6 @@ module.exports = function(server){
         answerCount += 1;
 
         if (answerCount === allPlayers.length) {
-
           io.sockets.emit('all-players-answered', currentAnswer)
         }
       }
@@ -63,8 +62,8 @@ module.exports = function(server){
               var theWinner = allPlayers[i].username
             }
           }
-          // console.log(theWinner);
-          io.sockets.emit('all-players-answered', theWinner)
+          console.log(theWinner);
+          io.sockets.emit('all-players-answered', JSON.stringify(allPlayers))
         }
       }
     })
