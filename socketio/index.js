@@ -122,26 +122,26 @@ module.exports = function(server){
 
 
     function checkIfUsed(id, text, answer){
-      var currentPromptId = id;
-        // Looks for the currentPromptId within the usedPromptArray
-      if (usedPromptArray.includes(currentPromptId)){
-          console.log('ALREADY SHOWN, RENDER ANOTHER PROMPT')
-          emitRandomPrompt();
-      }   // Handles a boolean prompt
-      else if (answer === 'true' || answer === 'false'){
-          usedPromptArray.push(currentPromptId)
-          console.log('Current prompt id ' + currentPromptId)
-          console.log('usedPromptArray length ' + usedPromptArray.length)
-          io.sockets.emit('play-boolean-prompt', text);
-          checkUsedPromptArrayLength();
-      } 
-      else { // Handles an open prompt
-          usedPromptArray.push(currentPromptId)
-          console.log('Current prompt id ' + currentPromptId)
-          console.log('usedPromptArray length ' + usedPromptArray.length)
-          io.sockets.emit('play-open-prompt', text);
-          checkUsedPromptArrayLength();
-      }
+        var currentPromptId = id;
+          // Looks for the currentPromptId within the usedPromptArray
+        if (usedPromptArray.includes(currentPromptId)){
+              console.log('ALREADY SHOWN, RENDER ANOTHER PROMPT')
+              emitRandomPrompt();
+        }   // Handles a boolean prompt
+        else if (answer === 'true' || answer === 'false'){
+              usedPromptArray.push(currentPromptId)
+              console.log('Current prompt id ' + currentPromptId)
+              console.log('usedPromptArray length ' + usedPromptArray.length)
+              io.sockets.emit('play-boolean-prompt', text);
+              checkUsedPromptArrayLength();
+        } 
+        else { // Handles an open prompt
+              usedPromptArray.push(currentPromptId)
+              console.log('Current prompt id ' + currentPromptId)
+              console.log('usedPromptArray length ' + usedPromptArray.length)
+              io.sockets.emit('play-open-prompt', text);
+              checkUsedPromptArrayLength();
+        }
     }
 
     // Checks the length of the usedPromptArray, if the array length = ?, release index 0 back to the available prompt pool.
