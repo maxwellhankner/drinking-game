@@ -103,8 +103,8 @@ function init(){
 
     socket.on('all-players-answered', function(data){
         $('.all-open-responses').hide();
+        afterResponseNext.show();
         if (data === 'true' || data === 'false'){
-            afterResponseNext.show();
             var checkedUserResponse;
             console.log(data);
             console.log('our: ' + ourAnswer);
@@ -119,10 +119,13 @@ function init(){
             afterResponseText.append(afterElement);
         }
         else {
+            while(data === null){
+
+            }
             var afterElement = $('<p>').text(data + " gives out a drink.")
             afterResponseText.empty();
             afterResponseText.append(afterElement);
-            afterResponseNext.show();
+            
         }
     })
 
