@@ -124,10 +124,9 @@ module.exports = function(server){
       var currentPromptId = id;
       
       if (usedPromptArray.includes(currentPromptId)){
-        console.log('duplicate')
-        emitRandomPrompt();
         console.log('DUPLICATE, RENDER ANOTHER PROMPT')
-      } else if (answer === 'boolean'){
+        emitRandomPrompt();
+      } else if (answer === 'true' || answer === 'false'){
         usedPromptArray.push(currentPromptId)
         io.sockets.emit('play-boolean-prompt', text);
        console.log('from boolean ' + usedPromptArray)
