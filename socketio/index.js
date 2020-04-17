@@ -95,7 +95,7 @@ module.exports = function(server){
         console.log('all players ready for next question')
         resetForNextPrompt();
         emitRandomPrompt();
-        console.log('reset jsut happened')
+        console.log('reset just happened')
       }
     })
 
