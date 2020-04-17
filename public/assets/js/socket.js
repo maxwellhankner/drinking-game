@@ -1,8 +1,8 @@
-// import { response } from "express";
-
 function init(){
     // Our answer
     var ourAnswer;
+    // Our 
+    var ourBlurFactor = 0;
 
     const socket = io(window.origin);
     // Emit username
@@ -113,9 +113,13 @@ function init(){
             console.log('our: ' + ourAnswer);
             if(data === ourAnswer){
                 checkedUserResponse = 'Correct, no need to drink.';
+                ourBlurFactor = 0;
+                updateBlurEffect(ourBlurFactor);
             }
             else{
-                checkedUserResponse = 'Wrong, cheers mate!'
+                checkedUserResponse = 'Wrong, cheers mate!';
+                ourBlurFactor += .5;
+                updateBlurEffect(ourBlurFactor);
             }
             var afterElement = $('<p>').text(checkedUserResponse)
             afterResponseText.empty();
@@ -147,4 +151,8 @@ function init(){
         return false;
     })
 
+}
+
+function updateBlurEffect(factor){
+    $('html').attr('style', `filter: blur(${factor}px)`)
 }
