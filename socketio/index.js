@@ -123,11 +123,11 @@ module.exports = function(server){
 
     function checkIfUsed(id, text, answer){
       var currentPromptId = id;
-      
+        // Looks through the usedPromptsArray to see if the currentPromptId exits within the array.
       if (usedPromptArray.includes(currentPromptId)){
           console.log('ALREADY SHOWN, RENDER ANOTHER PROMPT')
           emitRandomPrompt();
-      } 
+      }   // If the currentPromptId was not found in the usedPromptArray go to L:131
       else if (answer === 'true' || answer === 'false'){
           usedPromptArray.push(currentPromptId)
           console.log('Current prompt id ' + currentPromptId)
@@ -144,10 +144,11 @@ module.exports = function(server){
       }
     }
 
-
+    // Checks the length of the usedPromptArray, if the array length = ?, release index 0 back to the available prompt pool.
     function checkUsedPromptArrayLength(){
         if (usedPromptArray.length === 4){
             console.log('usedPromptArray length BEFORE shift ' + usedPromptArray)
+            // Removes index 0 of the usedPromptArray
             usedPromptArray.shift();
             console.log('usedPromptArray length AFTER shift ' + usedPromptArray)
         }
