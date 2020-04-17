@@ -123,7 +123,7 @@ module.exports = function(server){
 
     function checkIfUsed(id, text, answer){
       var currentPromptId = id;
-        // Looks through the usedPromptArray to see if the currentPromptId exists within the usedPromptArray.
+        // Looks for the currentPromptId within the usedPromptArray
       if (usedPromptArray.includes(currentPromptId)){
           console.log('ALREADY SHOWN, RENDER ANOTHER PROMPT')
           emitRandomPrompt();
