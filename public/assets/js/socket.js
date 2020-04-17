@@ -88,7 +88,7 @@ function init(){
 
     responseButton = $('.response-button');
     gameContainer.on('click', '.response-button', function(){
-        var response = $(this).text().toLowerCase();
+        var response = $(this).text();
         ourAnswer = response;
         socket.emit('player-response', response);
         $('.view-prompt').hide();
