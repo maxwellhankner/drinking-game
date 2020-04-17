@@ -63,7 +63,7 @@ module.exports = function(server){
             }
           }
           console.log(theWinner);
-          io.sockets.emit('all-players-answered', JSON.stringify(allPlayers))
+          io.sockets.emit('all-players-answered', theWinner)
         }
       }
     })
