@@ -98,6 +98,11 @@ p {
     width: 100%;
 }
 
-/* .all-open-responses {
-    margin: 10px;
-} */
+
+/* Responsive stuff for desktop */
+
+@media only screen and (min-width: 600px) {
+    #beer-foam {
+        display: none;
+    }
+}
