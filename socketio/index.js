@@ -116,50 +116,43 @@ module.exports = function(server){
         ]
       })
       .then(({id, text, answer}) => {
-        checkIfUsed(id, text, answer, usedPromptArray)
+          checkIfUsed(id, text, answer)
       })
     }
 
-    function checkIfUsed(id, text, answer, usedPromptArray){
+
+    function checkIfUsed(id, text, answer){
       var currentPromptId = id;
       
       if (usedPromptArray.includes(currentPromptId)){
-        console.log('DUPLICATE, RENDER ANOTHER PROMPT')
-        emitRandomPrompt();
-      } else if (answer === 'true' || answer === 'false'){
-        usedPromptArray.push(currentPromptId)
-        io.sockets.emit('play-boolean-prompt', text);
-       console.log('from boolean ' + usedPromptArray)
-      } else {
-        usedPromptArray.push(currentPromptId)
-        io.sockets.emit('play-open-prompt', text);
-       console.log('from open ' + usedPromptArray)  
+          console.log('ALREADY SHOWN, RENDER ANOTHER PROMPT')
+          emitRandomPrompt();
+      } 
+      else if (answer === 'true' || answer === 'false'){
+          usedPromptArray.push(currentPromptId)
+          console.log('current prompt id ' + currentPromptId)
+          console.log('arr length ' + usedPromptArray.length)
+          io.sockets.emit('play-boolean-prompt', text);
+          checkUsedPromptArrayLength();
+      } 
+      else {
+          usedPromptArray.push(currentPromptId)
+          console.log('current prompt id ' + currentPromptId)
+          console.log('arr length ' + usedPromptArray.length)
+          io.sockets.emit('play-open-prompt', text);
+          checkUsedPromptArrayLength();
       }
     }
 
 
-      // if (currentPromptId !== usedPromptCheckValue){
-      //   usedPromptArray.push(currentPromptId);
-      //   currentAnswer = answer;
-      //   if(answer === 'open'){
-      //     io.sockets.emit('play-open-prompt', text);
-      //   }
-      //   else {
-      //     io.sockets.emit('play-boolean-prompt', text);  
-      //   }      
-      // } 
-      // else {
+    function checkUsedPromptArrayLength(){
+        if (usedPromptArray.length === 4){
+            console.log('Array BEFORE shift ' + usedPromptArray)
+            usedPromptArray.shift();
+            console.log('Array AFTER shift ' + usedPromptArray)
+        }
+    }
 
-
-      // }
-      // console.log(currentPromptId)
-      // if (currentPromptId === usedPromptArray[i]){
-      // console.log('already used')
-      // }
-      
-    
-  
-  
 
     function resetForNextPrompt(){
       answerCount = 0;
@@ -169,7 +162,7 @@ module.exports = function(server){
     }
 
   });
-}
+
 
 // Create an array of only player names as strings, not players as objects
 function getNameList(array){
@@ -213,4 +206,4 @@ function findMode(arr){
     }
     return mode;
 }
-
+}
