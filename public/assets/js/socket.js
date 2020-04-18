@@ -1,6 +1,8 @@
 function init() {
+
     // Our answer
     var ourAnswer;
+
     // Our 
     var ourBlurFactor = 0;
 
@@ -19,6 +21,7 @@ function init() {
             playersList.append(thisPlayer);
         }
     });
+
 
     // Start with players
     startWithPlayersButton = $('#start-with-players-button')
@@ -112,12 +115,15 @@ function init() {
             console.log(data);
             console.log('our: ' + ourAnswer);
             if (data === ourAnswer) {
-                checkedUserResponse = 'Correct, no need to drink.';
+                // playSoundSuccess();
+                playSoundCorrectAnswer();
+                checkedUserResponse = 'CORRECT! No need to drink.';
                 ourBlurFactor = 0;
                 updateBlurEffect(ourBlurFactor);
             }
             else {
-                checkedUserResponse = 'Wrong, cheers mate!';
+                playSoundGlassClink();
+                checkedUserResponse = 'WRONG! Cheers mate!';
                 ourBlurFactor += .5;
                 updateBlurEffect(ourBlurFactor);
             }
@@ -126,6 +132,8 @@ function init() {
             afterResponseText.append(afterElement);
         }
         else {
+            // glassClink();
+            playSoundGlassClink();
             var afterElement = $('<p>');
             afterElement.text(data + " gives out a drink.")
             afterResponseText.empty();
@@ -158,7 +166,6 @@ function init() {
         socket.emit('reset-game-button', 'reset')
     })
 }
-
 function updateBlurEffect(factor) {
     $('html').attr('style', `filter: blur(${factor}px)`)
 }

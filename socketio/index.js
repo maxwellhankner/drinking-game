@@ -12,14 +12,14 @@ module.exports = function(server){
   var topResponsesArray = [];
   var usedPromptArray = [];
   
-
+  
   io.on('connection', (socket) => {
     console.log('made socket connection', socket.id);
     
     socket.on('new-player', function(data){
         allPlayers.push({username: data, userId: socket.id, answer: null});
         var nameList = getNameList(allPlayers);
-        io.sockets.emit('update-players-list', nameList)
+        io.sockets.emit('update-players-list', nameList);
     });
 
     socket.on('start-with-players', function(){
@@ -98,13 +98,14 @@ module.exports = function(server){
     })
 
     socket.on('after-end-button', function(){
+      // playSoundResetButton();
       console.log('server ended game')
-      
       io.sockets.emit('end-game', 'The game has ended')
       allPlayers = [];
       resetForNextPrompt();
-      // reset the server      
     })
+   
+
 
     socket.on('reset-game-button', function(){
       io.sockets.emit('end-game', 'The game has ended')
@@ -150,7 +151,7 @@ module.exports = function(server){
     // Checks the length of the usedPromptArray, if the array length reaches a set amount, release index 0 back to the available prompt pool.
     // This function will allow the game to run indefinitely while preventing a prompt from re-appearing too often.
     function checkUsedPromptArrayLength(){
-        if (usedPromptArray.length === 4){
+        if (usedPromptArray.length === 49){
             usedPromptArray.shift();  // Removes index 0 of the usedPromptArray
         }
     }
