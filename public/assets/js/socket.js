@@ -1,17 +1,4 @@
 function init() {
-    
-    // Audio Functions
-    function playSoundGlassClink () {
-        createjs.Sound.play(soundGlassClink);
-      }
-
-    function playSoundSucess(){
-        createjs.Sound.play(soundSuccess);
-    }
-
-    function playSoundPlayerJoined(){
-        createjs.Sound.play(playSoundPlayerJoined)
-    }
 
     // Our answer
     var ourAnswer;
@@ -34,6 +21,7 @@ function init() {
             playersList.append(thisPlayer);
         }
     });
+
 
     // Start with players
     startWithPlayersButton = $('#start-with-players-button')
@@ -127,7 +115,7 @@ function init() {
             console.log(data);
             console.log('our: ' + ourAnswer);
             if (data === ourAnswer) {
-                playSoundSucess();
+                playSoundSuccess();
                 checkedUserResponse = 'CORRECT! No need to drink.';
                 ourBlurFactor = 0;
                 updateBlurEffect(ourBlurFactor);
@@ -178,7 +166,6 @@ function init() {
         socket.emit('reset-game-button', 'reset')
     })
 }
-
 function updateBlurEffect(factor) {
     $('html').attr('style', `filter: blur(${factor}px)`)
 }

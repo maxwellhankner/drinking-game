@@ -9,6 +9,11 @@ let joinGameButton = $('#join-game-button');
 let editPromptsButton = $('#edit-prompts-button');
 let backToLandingButton = $('#back-to-landing');
 let startButton = $('#start-button');
+let booleanTrueButton = $('#response-true-button');
+
+// booleanTrueButton.click(function(){
+//     playSoundSuccess();
+// })
 
 editPromptsButton.click(function(){
     landingContainer.attr('style', 'display: none');
@@ -23,6 +28,8 @@ backToLandingButton.click(function(){
 joinGameButton.click(function(){
     landingContainer.attr('style', 'display: none');
     usernameContainer.attr('style', 'display: block');
+    playSoundGlassClink();
+    // playSoundSuccess();
 })
 
 startButton.click(function(){
