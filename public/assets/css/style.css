@@ -29,6 +29,7 @@ p {
 }
 
 .toggle-mute {
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -136,7 +137,7 @@ input#un-mute:checked ~ .mute img {
 /* Responsive stuff for desktop */
 
 @media only screen and (min-width: 600px) {
-    #beer-foam {
-        display: none;
+    .toggle-mute {
+        display: block;
     }
 }
