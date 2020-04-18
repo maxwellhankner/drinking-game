@@ -28,6 +28,15 @@ p {
   flex-direction: column;
 }
 
+.toggle-mute {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+}
+
 /* Bootstrap */
 .container-fluid {
     max-width: 500px;

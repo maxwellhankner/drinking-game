@@ -5,6 +5,7 @@ let usernameContainer = $('.username-container');
 let gameContainer = $('.game-container');
 
 // Buttons
+let toggleMuteButton = $('.toggle-mute');
 let joinGameButton = $('#join-game-button');
 let editPromptsButton = $('#edit-prompts-button');
 let backToLandingButton = $('#back-to-landing');
@@ -13,6 +14,20 @@ let submitButton = $('#response-open-button');
 let readyButton = $('#after-ready-button');
 let letsGoButton = $('#start-with-players-button');
 let resetButton = $('#after-end-button');
+
+let toggleOn = true;
+toggleMuteButton.click(function(){
+if(toggleOn){
+    toggleOn = false
+    $('#mute-icon').removeClass('fa-volume-up');
+    $('#mute-icon').addClass('fa-volume-mute');
+}
+else{
+    toggleOn = true;
+    $('#mute-icon').removeClass('fa-volume-mute');
+    $('#mute-icon').addClass('fa-volume-up');
+}
+})
 
 resetButton.click(function(){
     playSoundResetButton();
