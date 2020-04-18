@@ -1,6 +1,6 @@
--- USE apm5oe9jsj5tdj7x;
+USE apm5oe9jsj5tdj7x;
 
-USE materials_db;
+
 
 INSERT INTO Prompts (text, answer)
 VALUES
