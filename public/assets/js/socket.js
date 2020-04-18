@@ -1,6 +1,21 @@
 function init() {
+    
+    // Audio Functions
+    function playSoundGlassClink () {
+        createjs.Sound.play(soundGlassClink);
+      }
+
+    function playSoundSucess(){
+        createjs.Sound.play(soundSuccess);
+    }
+
+    function playSoundPlayerJoined(){
+        createjs.Sound.play(playSoundPlayerJoined)
+    }
+
     // Our answer
     var ourAnswer;
+
     // Our 
     var ourBlurFactor = 0;
 
@@ -112,12 +127,15 @@ function init() {
             console.log(data);
             console.log('our: ' + ourAnswer);
             if (data === ourAnswer) {
-                checkedUserResponse = 'Correct, no need to drink.';
+                playSoundSucess();
+                checkedUserResponse = 'CORRECT! No need to drink.';
                 ourBlurFactor = 0;
                 updateBlurEffect(ourBlurFactor);
             }
             else {
-                checkedUserResponse = 'Wrong, cheers mate!';
+                // glassClink();
+                playSoundGlassClink();
+                checkedUserResponse = 'WRONG! Cheers mate!';
                 ourBlurFactor += .5;
                 updateBlurEffect(ourBlurFactor);
             }
@@ -126,6 +144,8 @@ function init() {
             afterResponseText.append(afterElement);
         }
         else {
+            // glassClink();
+            playSoundGlassClink();
             var afterElement = $('<p>');
             afterElement.text(data + " gives out a drink.")
             afterResponseText.empty();

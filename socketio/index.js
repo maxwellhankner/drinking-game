@@ -12,14 +12,14 @@ module.exports = function(server){
   var topResponsesArray = [];
   var usedPromptArray = [];
   
-
+  
   io.on('connection', (socket) => {
     console.log('made socket connection', socket.id);
     
     socket.on('new-player', function(data){
         allPlayers.push({username: data, userId: socket.id, answer: null});
         var nameList = getNameList(allPlayers);
-        io.sockets.emit('update-players-list', nameList)
+        io.sockets.emit('update-players-list', nameList);
     });
 
     socket.on('start-with-players', function(){
