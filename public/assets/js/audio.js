@@ -16,23 +16,33 @@ function loadSounds () {
 }
 
 function playSoundGlassClink () {
-    createjs.Sound.play(soundGlassClink);
+    if(toggleOn){
+        createjs.Sound.play(soundGlassClink);
+    }
 }
 
 function playSoundCorrectAnswer(){
-    createjs.Sound.play(soundCorrectAnswer);
+    if(toggleOn){
+        createjs.Sound.play(soundCorrectAnswer);
+    }
 }
 
 function playSoundSubmitAnswer(){
-    createjs.Sound.play(soundSubmitAnswer);
+    if(toggleOn){
+        createjs.Sound.play(soundSubmitAnswer);
+    }
 }
 
 function playSoundJoinConfirm(){
-    createjs.Sound.play(soundJoinConfirm);
+    if(toggleOn){
+        createjs.Sound.play(soundJoinConfirm);
+    }
 }
 
 function playSoundResetButton(){
-    // createjs.Sound.play(soundResetButton);
+    if(toggleOn){
+        // createjs.Sound.play(soundResetButton);
+    }
 }
 
 
