@@ -11,7 +11,12 @@ let backToLandingButton = $('#back-to-landing');
 let startButton = $('#start-button');
 let submitButton = $('#response-open-button');
 let readyButton = $('#after-ready-button');
+let letsGoButton = $('#start-with-players-button');
+let resetButton = $('#after-end-button');
 
+resetButton.click(function(){
+    playSoundResetButton();
+})
 
 
 editPromptsButton.click(function(){
@@ -31,7 +36,7 @@ joinGameButton.click(function(){
 })
 
 startButton.click(function(){
-   playSoundJoinConfirm();
+//    playSoundJoinConfirm();
     usernameContainer.attr('style', 'display: none');
     gameContainer.attr('style', 'display: block');
     init();
@@ -44,6 +49,16 @@ submitButton.click(function(){
 readyButton.click(function(){
     playSoundSubmitAnswer();
 })
+
+letsGoButton.click(function(){
+    playSoundSubmitAnswer();
+})
+
+resetButton.click(function(){
+    // playSoundResetButton();
+})
+
+
 
 // -------------------------------------------------- API CALLS
 // Add new prompt using api call

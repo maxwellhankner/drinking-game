@@ -10,7 +10,7 @@ VALUES
 ('"Eurobeat is primarily an Italian genre of music."', 'true'),
 ('"Next from J.K. Rowling: Harry Potter and the Chamber of _____."', 'open'),
 ('"Nutella is produced by the German company Ferrero."', 'false'),
-('"The colors of the pils in The Matrix were blue and yellow."', 'false'),
+('"The colors of the pills in The Matrix were blue and yellow."', 'false'),
 ('"Here is the church, here is the steeple. Open the doors and see all the _____."', 'open'),
 ('"50% of marriages end in _____."', 'open'),
 ('"As the parent of five, you are no stranger to _____."', 'open'),

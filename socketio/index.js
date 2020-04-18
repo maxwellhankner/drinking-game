@@ -98,13 +98,14 @@ module.exports = function(server){
     })
 
     socket.on('after-end-button', function(){
+      // playSoundResetButton();
       console.log('server ended game')
-      
       io.sockets.emit('end-game', 'The game has ended')
       allPlayers = [];
       resetForNextPrompt();
-      // reset the server      
     })
+   
+
 
     socket.on('reset-game-button', function(){
       io.sockets.emit('end-game', 'The game has ended')
