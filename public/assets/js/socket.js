@@ -134,9 +134,12 @@ function init() {
         else {
             // glassClink();
             playSoundGlassClink();
+            var winningPromptElement = $('<p>');
+            winningPromptElement.text('"' + data.prompt + '"');
             var afterElement = $('<p>');
-            afterElement.text(data + " gives out a drink.")
+            afterElement.text(data.winner + " gives out a drink.");
             afterResponseText.empty();
+            afterResponseText.append(winningPromptElement);
             afterResponseText.append(afterElement);
 
         }

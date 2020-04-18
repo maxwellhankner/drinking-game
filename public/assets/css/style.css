@@ -99,8 +99,16 @@ p {
     margin: 10px;
 }
 
+.players-list {
+    text-align: center;
+}
+
 .view-prompt {
     display: none;
+}
+
+.prompt-text {
+    text-align: center;
 }
 
 .after-response {
@@ -111,8 +119,13 @@ p {
     display: none;
 }
 
+.after-response-text {
+    text-align: center;
+}
+
 #response-open-text {
     width: 100%;
+    
 }
 
 /* Mute button*/

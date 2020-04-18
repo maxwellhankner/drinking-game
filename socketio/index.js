@@ -62,8 +62,8 @@ module.exports = function(server){
               var theWinner = allPlayers[i].username
             }
           }
-          console.log(theWinner);
-          io.sockets.emit('all-players-answered', theWinner)
+          console.log(winnerResponse);
+          io.sockets.emit('all-players-answered', {winner: theWinner, prompt: winnerResponse})
         }
       }
     })
