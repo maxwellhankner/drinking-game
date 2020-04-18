@@ -31,23 +31,19 @@ joinGameButton.click(function(){
 })
 
 startButton.click(function(){
-    playSoundJoinConfirm();
+   playSoundJoinConfirm();
     usernameContainer.attr('style', 'display: none');
     gameContainer.attr('style', 'display: block');
     init();
 })
 
 submitButton.click(function(){
-    playSoundSubmitAnswer();
+    playSoundJoinConfirm();
 })
 
 readyButton.click(function(){
     playSoundSubmitAnswer();
 })
-
-
-
-
 
 // -------------------------------------------------- API CALLS
 // Add new prompt using api call
