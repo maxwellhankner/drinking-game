@@ -1,4 +1,4 @@
-function init(){
+function init() {
     // Our answer
     var ourAnswer;
     // Our 
@@ -14,7 +14,7 @@ function init(){
     playersList = $('.players-list');
     socket.on('update-players-list', response => {
         playersList.empty();
-        for (var i = 0; i < response.length; i++){
+        for (var i = 0; i < response.length; i++) {
             thisPlayer = $('<p>').text(response[i]);
             playersList.append(thisPlayer);
         }
@@ -22,12 +22,12 @@ function init(){
 
     // Start with players
     startWithPlayersButton = $('#start-with-players-button')
-    startWithPlayersButton.click(function(){
+    startWithPlayersButton.click(function () {
         socket.emit('start-with-players', 'lets go');
     })
 
     // Play boolean prompt
-    socket.on('play-boolean-prompt', function(data){
+    socket.on('play-boolean-prompt', function (data) {
         // Reset Interface
         $('.after-response').hide();
         $('#after-ready-button').show();
@@ -43,7 +43,7 @@ function init(){
     })
 
     // Play open prompt
-    socket.on('play-open-prompt', function(data){
+    socket.on('play-open-prompt', function (data) {
         // Reset Interface
         $('.after-response').hide();
         $('#after-ready-button').show();
@@ -61,17 +61,17 @@ function init(){
     // Event listener for submitting open response text
     responseOpenButton = $('#response-open-button');
     responseOpenText = $('#response-open-text');
-    responseOpenButton.click(function(){
+    responseOpenButton.click(function () {
         var response = responseOpenText.val();
         responseOpenText.val('');
         socket.emit('player-response-open-text', response);
         $('.prompt-response-open').hide();
     })
 
-    socket.on('all-players-responded-open', function(data){
+    socket.on('all-players-responded-open', function (data) {
         $('.all-open-responses').show();
         $('.all-open-responses').empty();
-        for(var i = 0; i < data.length; i++){
+        for (var i = 0; i < data.length; i++) {
             var buttonDiv = $('<div>');
             var openElement = $('<button>');
             openElement.text(data[i]);
@@ -87,9 +87,9 @@ function init(){
     responseTrueButton = $('#response-true-button');
 
     responseButton = $('.response-button');
-    gameContainer.on('click', '.response-button', function(){
+    gameContainer.on('click', '.response-button', function () {
         var response = $(this).text();
-        if (response === 'TRUE' || response === 'FALSE'){
+        if (response === 'TRUE' || response === 'FALSE') {
             response = response.toLowerCase();
         }
         ourAnswer = response;
@@ -101,22 +101,22 @@ function init(){
         $('.after-response').show();
         $('.after-response-next').hide();
     })
-    
+
     afterResponseNext = $('.after-response-next');
 
-    socket.on('all-players-answered', function(data){
+    socket.on('all-players-answered', function (data) {
         $('.all-open-responses').hide();
         afterResponseNext.show();
-        if (data === 'true' || data === 'false'){
+        if (data === 'true' || data === 'false') {
             var checkedUserResponse;
             console.log(data);
             console.log('our: ' + ourAnswer);
-            if(data === ourAnswer){
+            if (data === ourAnswer) {
                 checkedUserResponse = 'Correct, no need to drink.';
                 ourBlurFactor = 0;
                 updateBlurEffect(ourBlurFactor);
             }
-            else{
+            else {
                 checkedUserResponse = 'Wrong, cheers mate!';
                 ourBlurFactor += .5;
                 updateBlurEffect(ourBlurFactor);
@@ -130,29 +130,35 @@ function init(){
             afterElement.text(data + " gives out a drink.")
             afterResponseText.empty();
             afterResponseText.append(afterElement);
-            
+
         }
     })
 
     afterReadyButton = $('#after-ready-button');
-    afterReadyButton.click(function(){
+    afterReadyButton.click(function () {
         socket.emit('after-ready-button', 'READY');
         afterReadyButton.hide();
     })
 
     afterEndButton = $('#after-end-button');
-    afterEndButton.click(function(){
+    afterEndButton.click(function () {
         socket.emit('after-end-button', 'The game has ended');
         console.log('reset page')
     })
 
-    socket.on('end-game', function(){
+    socket.on('end-game', function () {
+
         window.location.reload();
         return false;
     })
 
+    resetGameButton = $('#reset-game-button');
+    resetGameButton.click(function () {
+        console.log('reset game')
+        socket.emit('reset-game-button', 'reset')
+    })
 }
 
-function updateBlurEffect(factor){
+function updateBlurEffect(factor) {
     $('html').attr('style', `filter: blur(${factor}px)`)
 }

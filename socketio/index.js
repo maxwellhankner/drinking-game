@@ -106,6 +106,17 @@ module.exports = function(server){
       // reset the server      
     })
 
+    socket.on('reset-game-button', function(){
+      io.sockets.emit('end-game', 'The game has ended')
+      answerCount = 0;
+      currentAnswer = '';
+      playerReadyCount = 0;
+      topResponsesArray = [];
+      usedPromptArray = [];
+      allPlayers = [];
+      resetForNextPrompt();
+    })
+
 
     function emitRandomPrompt(){
       db.Prompt.findOne({
