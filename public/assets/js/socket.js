@@ -115,13 +115,13 @@ function init() {
             console.log(data);
             console.log('our: ' + ourAnswer);
             if (data === ourAnswer) {
-                playSoundSuccess();
+                // playSoundSuccess();
+                playSoundCorrectAnswer();
                 checkedUserResponse = 'CORRECT! No need to drink.';
                 ourBlurFactor = 0;
                 updateBlurEffect(ourBlurFactor);
             }
             else {
-                // glassClink();
                 playSoundGlassClink();
                 checkedUserResponse = 'WRONG! Cheers mate!';
                 ourBlurFactor += .5;
