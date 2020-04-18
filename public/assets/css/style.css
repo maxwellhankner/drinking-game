@@ -20,12 +20,6 @@ p {
     font-size: 20px;
 }
 
-#beer-foam {
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
 .giphy {
     /* width: 100px; */
     display: flex;
