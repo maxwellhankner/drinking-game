@@ -47,11 +47,11 @@ backToLandingButton.click(function(){
 joinGameButton.click(function(){
     landingContainer.attr('style', 'display: none');
     usernameContainer.attr('style', 'display: block');
-    playSoundGlassClink();
+    
 })
 
 startButton.click(function(){
-//    playSoundJoinConfirm();
+    playSoundGlassClink();  
     usernameContainer.attr('style', 'display: none');
     gameContainer.attr('style', 'display: block');
     init();
