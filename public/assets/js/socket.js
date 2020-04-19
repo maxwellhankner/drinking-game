@@ -72,12 +72,30 @@ function init() {
     })
 
     socket.on('all-players-responded-open', function (data) {
+        var playerAnswers = getAllOpenResponseList(data);
+
         $('.all-open-responses').show();
         $('.all-open-responses').empty();
-        for (var i = 0; i < data.length; i++) {
+        console.log('username ' + username);
+        console.log('data ' + data);
+        console.log('playerAnswers ' + playerAnswers);
+        if (playerAnswers.length > 1){
+            for (var i = 0; i < playerAnswers.length; i++) {
+                if (username !== data[i].username){
+                    var buttonDiv = $('<div>');
+                    var openElement = $('<button>');
+                    openElement.text(playerAnswers[i]);
+                    openElement.addClass('response-button btn btn-dark');
+                    buttonDiv.append(openElement)
+                    $('.all-open-responses').append(buttonDiv);
+                    $('.after-response-next').hide();
+                }
+            }
+        }
+        else {
             var buttonDiv = $('<div>');
             var openElement = $('<button>');
-            openElement.text(data[i]);
+            openElement.text(playerAnswers);
             openElement.addClass('response-button btn btn-dark');
             buttonDiv.append(openElement)
             $('.all-open-responses').append(buttonDiv);
@@ -169,6 +187,15 @@ function init() {
         socket.emit('reset-game-button', 'reset')
     })
 }
+
+function getAllOpenResponseList(array){
+    var newArray = [];
+    for (var i = 0; i < array.length; i++){
+      newArray.push(array[i].answer);
+    }
+    return newArray;
+}
+
 function updateBlurEffect(factor) {
     $('html').attr('style', `filter: blur(${factor}px)`)
 }

@@ -82,8 +82,8 @@ module.exports = function(server){
         // Reset
         answerCount = 0;
         // Create all responses array
-        var playerAnswers = getAllOpenResponseList(allPlayers);
-        io.sockets.emit('all-players-responded-open', playerAnswers);
+        // var playerAnswers = getAllOpenResponseList(allPlayers);
+        io.sockets.emit('all-players-responded-open', allPlayers);
       }
     })
 
@@ -176,13 +176,13 @@ function getNameList(array){
   return newArray;
 }
 
-function getAllOpenResponseList(array){
-  var newArray = [];
-  for (var i = 0; i < array.length; i++){
-    newArray.push(array[i].answer);
-  }
-  return newArray;
-}
+// function getAllOpenResponseList(array){
+//   var newArray = [];
+//   for (var i = 0; i < array.length; i++){
+//     newArray.push(array[i].answer);
+//   }
+//   return newArray;
+// }
 
 function getWinners(responsesArray){
   // figure out the top response(s)
