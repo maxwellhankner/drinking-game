@@ -76,9 +76,6 @@ function init() {
 
         $('.all-open-responses').show();
         $('.all-open-responses').empty();
-        console.log('username ' + username);
-        console.log('data ' + data);
-        console.log('playerAnswers ' + playerAnswers);
         if (playerAnswers.length > 1){
             for (var i = 0; i < playerAnswers.length; i++) {
                 if (username !== data[i].username){
