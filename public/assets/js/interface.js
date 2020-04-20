@@ -14,6 +14,7 @@ let submitButton = $('#response-open-button');
 let readyButton = $('#after-ready-button');
 let letsGoButton = $('#start-with-players-button');
 let resetButton = $('#after-end-button');
+let modalButton = $('#modalButton');
 
 let toggleOn = true;
 toggleMuteButton.click(function(){
@@ -47,7 +48,7 @@ backToLandingButton.click(function(){
 joinGameButton.click(function(){
     landingContainer.attr('style', 'display: none');
     usernameContainer.attr('style', 'display: block');
-    
+    modalButton.attr('style', 'display: none');
 })
 
 startButton.click(function(){
