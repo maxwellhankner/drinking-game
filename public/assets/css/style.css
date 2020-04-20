@@ -131,6 +131,29 @@ p {
     width: 100%;
 }
 
+/* MODAL STYLING */
+.modalTextBox {
+    text-align: center;
+    align-content: center;
+}
+
+
+.headerText {
+    text-align: center;
+}
+
+.modalInputs {
+    background-color: black;
+    color: lightgray;
+}
+
+.welcome {
+    background-color: #fdc350;
+    color: black;
+    border-bottom: solid;
+    padding: 10px;
+}
+
 /* Desktop View */
 @media only screen and (min-width: 600px) {
     .toggle-mute {

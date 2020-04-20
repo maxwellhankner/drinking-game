@@ -1,11 +1,7 @@
-SELECT * FROM apm5oe9jsj5tdj7x.Prompts;
-
 DROP DATABASE IF EXISTS apm5oe9jsj5tdj7x;
 CREATE DATABASE apm5oe9jsj5tdj7x;
 
 USE apm5oe9jsj5tdj7x;
-
-DELETE FROM Prompts;
 
 CREATE TABLE Prompts (
   id INT NOT NULL AUTO_INCREMENT,
