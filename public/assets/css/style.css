@@ -21,11 +21,10 @@ p {
 }
 
 .giphy {
-    /* width: 100px; */
     display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .toggle-mute {
@@ -45,7 +44,6 @@ p {
 
 .btn {
     width: 100%;
-    /* display: block; */
 }
 .btn-group {
     width: 100%;
