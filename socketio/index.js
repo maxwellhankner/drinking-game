@@ -168,13 +168,13 @@ function getNameList(array){
   return newArray;
 }
 
-function getAllOpenResponseList(array){
-  var newArray = [];
-  for (var i = 0; i < array.length; i++){
-    newArray.push(array[i].answer);
-  }
-  return newArray;
-}
+// function getAllOpenResponseList(array){
+//   var newArray = [];
+//   for (var i = 0; i < array.length; i++){
+//     newArray.push(array[i].answer);
+//   }
+//   return newArray;
+// }
 
 function getWinners(responsesArray){
   // figure out the top response(s)
