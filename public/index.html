@@ -30,6 +30,10 @@
             <div>
                 <button type="submit" id="edit-prompts-button" class="btn btn-dark">EDIT PROMPTS</button>
             </div>
+            <div id="modalButton">
+                <button type="button" class="btn btn-dark" id="howToModal" data-toggle="modal" data-target="#homePageModal">HOW TO PLAY
+                </button>
+            </div>
         </div>
     
         <div class="prompts-container">
@@ -54,17 +58,13 @@
             </div>
         </div>
 
-        <div id="modalButton">
-            <button type="button" class="btn btn-dark" id="howToModal" data-toggle="modal" data-target="#homePageModal">HOW TO PLAY
-            </button>
-        </div>
         <div id="homePageModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
          aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="helpModal modal-content">
                     <div class="modalInputs">
                         <div class=" row">
-                            <div class="col-xs-12 col-sm-12" id="modalTextBox">
+                            <div class="col-xs-12 col-sm-12 modal-vody" id="modalTextBox">
                                 <div class="welcome">
                                 <h2 class="headerText">HOW TO PLAY<br></h2>
                                 </div>
@@ -91,13 +91,16 @@
                                 Winners and their response are selected the same as above.</p>
                                 <h5 class="headerText welcome">RESET THE GAME</h5>
                                 <p class="headerText">If you need to reset the game, click the 'RED X'. This will remove everyone from the game, and reset all screens to the home page, where you can start a new game.<br><br></p>
-
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>                                    
                 </div>
+            </div>
         </div>
-    </div>
     
         <div class="username-container layout">
             <div>
