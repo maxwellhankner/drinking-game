@@ -35,15 +35,3 @@ function playSoundJoinConfirm(){
         createjs.Sound.play(soundJoinConfirm);
     }
 }
-
-
-
-   
-    
-
-    
-
-
-
-
-

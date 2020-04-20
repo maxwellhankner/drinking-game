@@ -75,7 +75,6 @@ module.exports = function(server){
 
       if (answerCount === allPlayers.length) {
         answerCount = 0;
-        // var playerAnswers = getAllOpenResponseList(allPlayers);
         io.sockets.emit('all-players-responded-open', allPlayers);
       }
     })
@@ -164,14 +163,6 @@ function getNameList(array){
   var newArray = [];
   for (var i = 0; i < array.length; i++){
     newArray.push(array[i].username);
-  }
-  return newArray;
-}
-
-function getAllOpenResponseList(array){
-  var newArray = [];
-  for (var i = 0; i < array.length; i++){
-    newArray.push(array[i].answer);
   }
   return newArray;
 }
