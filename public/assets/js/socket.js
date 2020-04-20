@@ -3,7 +3,7 @@ function init() {
     // Our answer
     var ourAnswer;
 
-    // Our 
+    // Our Blur Factor
     var ourBlurFactor = 0;
 
     const socket = io(window.origin);
@@ -112,10 +112,7 @@ function init() {
         afterResponseNext.show();
         if (data === 'true' || data === 'false') {
             var checkedUserResponse;
-            console.log(data);
-            console.log('our: ' + ourAnswer);
             if (data === ourAnswer) {
-                // playSoundSuccess();
                 playSoundCorrectAnswer();
                 checkedUserResponse = 'CORRECT! No need to drink.';
                 ourBlurFactor = 0;
@@ -132,7 +129,6 @@ function init() {
             afterResponseText.append(afterElement);
         }
         else {
-            // glassClink();
             playSoundGlassClink();
             var winningPromptElement = $('<p>');
             winningPromptElement.text('"' + data.prompt + '"');
@@ -154,7 +150,6 @@ function init() {
     afterEndButton = $('#after-end-button');
     afterEndButton.click(function () {
         socket.emit('after-end-button', 'The game has ended');
-        console.log('reset page')
     })
 
     socket.on('end-game', function () {
@@ -165,7 +160,6 @@ function init() {
 
     resetGameButton = $('#reset-game-button');
     resetGameButton.click(function () {
-        console.log('reset game')
         socket.emit('reset-game-button', 'reset')
     })
 }

@@ -28,8 +28,6 @@ module.exports = function(server){
     })
 
     socket.on('player-response', function(data){
-      // console.log(data);
-      // console.log(currentAnswer);
       if(data === 'true' || data === 'false'){
         for (var i = 0; i < allPlayers.length; i++){
           if (socket.id === allPlayers[i].userId){
@@ -56,13 +54,10 @@ module.exports = function(server){
         if (answerCount === allPlayers.length) {
           var winnerResponse = getWinners(topResponsesArray);
           for (var i = 0; i < allPlayers.length; i++){
-            // console.log(allPlayers[i].answer)
-            // console.log(winnerResponse)
             if (allPlayers[i].open === winnerResponse){
               var theWinner = allPlayers[i].username
             }
           }
-          console.log(winnerResponse);
           io.sockets.emit('all-players-answered', {winner: theWinner, prompt: winnerResponse})
         }
       }
@@ -79,9 +74,7 @@ module.exports = function(server){
       answerCount += 1;
 
       if (answerCount === allPlayers.length) {
-        // Reset
         answerCount = 0;
-        // Create all responses array
         var playerAnswers = getAllOpenResponseList(allPlayers);
         io.sockets.emit('all-players-responded-open', playerAnswers);
       }
@@ -98,7 +91,6 @@ module.exports = function(server){
     })
 
     socket.on('after-end-button', function(){
-      // playSoundResetButton();
       console.log('server ended game')
       io.sockets.emit('end-game', 'The game has ended')
       allPlayers = [];

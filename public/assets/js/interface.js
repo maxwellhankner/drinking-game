@@ -69,12 +69,6 @@ letsGoButton.click(function(){
     playSoundSubmitAnswer();
 })
 
-resetButton.click(function(){
-    // playSoundResetButton();
-})
-
-
-
 // -------------------------------------------------- API CALLS
 // Add new prompt using api call
 var addPromptButton = $('#add-prompt-button')
