@@ -124,26 +124,24 @@ module.exports = function(server){
 
     function checkIfUsed(id, text, answer){
         var currentPromptId = id;
-          // Looks for the currentPromptId within the usedPromptArray
         if (usedPromptArray.includes(currentPromptId)){
               emitRandomPrompt();
-        }   // Handles a boolean prompt
+        }
         else if (answer === 'true' || answer === 'false'){
               usedPromptArray.push(currentPromptId);
               io.sockets.emit('play-boolean-prompt', text);
               checkUsedPromptArrayLength();
         } 
-        else { // Handles an open prompt
+        else {
               usedPromptArray.push(currentPromptId);
               io.sockets.emit('play-open-prompt', text);
               checkUsedPromptArrayLength();
         }
     }
-    // Checks the length of the usedPromptArray, if the array length reaches a set amount, release index 0 back to the available prompt pool.
-    // This function will allow the game to run indefinitely while preventing a prompt from re-appearing too often.
+    
     function checkUsedPromptArrayLength(){
         if (usedPromptArray.length === 49){
-            usedPromptArray.shift();  // Removes index 0 of the usedPromptArray
+            usedPromptArray.shift();
         }
     }
 
@@ -157,8 +155,6 @@ module.exports = function(server){
 
   });
 
-
-// Create an array of only player names as strings, not players as objects
 function getNameList(array){
   var newArray = [];
   for (var i = 0; i < array.length; i++){
@@ -168,9 +164,7 @@ function getNameList(array){
 }
 
 function getWinners(responsesArray){
-  // figure out the top response(s)
   var mostOften = findMode(responsesArray);
-  // push those players in the returned array
   return mostOften;
 }
 

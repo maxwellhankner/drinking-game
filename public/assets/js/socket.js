@@ -1,18 +1,15 @@
 function init() {
 
-    // Our answer
     var ourAnswer;
 
-    // Our Blur Factor
     var ourBlurFactor = 0;
 
     const socket = io(window.origin);
-    // Emit username
+
     var username = $('#username').val();
     $('#username').val('');
     socket.emit('new-player', username)
 
-    // Players List
     playersList = $('.players-list');
     socket.on('update-players-list', response => {
         playersList.empty();
@@ -22,22 +19,16 @@ function init() {
         }
     });
 
-
-    // Start with players
     startWithPlayersButton = $('#start-with-players-button')
     startWithPlayersButton.click(function () {
         socket.emit('start-with-players', 'lets go');
     })
 
-    // Play boolean prompt
     socket.on('play-boolean-prompt', function (data) {
-        // Reset Interface
         $('.after-response').hide();
         $('#after-ready-button').show();
         $('.prompt-responses').show();
         $('.prompt-response-open').hide();
-
-        // Play the given prompt
         $('.waiting-area').attr('style', 'display: none');
         $('.view-prompt').attr('style', 'display: block');
         $('.prompt-text').empty();
@@ -45,15 +36,11 @@ function init() {
         $('.prompt-text').append(prompt);
     })
 
-    // Play open prompt
     socket.on('play-open-prompt', function (data) {
-        // Reset Interface
         $('.after-response').hide();
         $('#after-ready-button').show();
         $('.prompt-responses').hide();
         $('.prompt-response-open').show();
-
-        // Play the given prompt
         $('.waiting-area').attr('style', 'display: none');
         $('.view-prompt').attr('style', 'display: block');
         $('.prompt-text').empty();
@@ -61,7 +48,6 @@ function init() {
         $('.prompt-text').append(prompt);
     })
 
-    // Event listener for submitting open response text
     responseOpenButton = $('#response-open-button');
     responseOpenText = $('#response-open-text');
     responseOpenButton.click(function () {
