@@ -4,7 +4,6 @@ let soundSubmitAnswer = "submit-answer-sound";
 let soundJoinConfirm = "join-confirm-sound";
 let soundResetButton = "reset-button-sound";
 
-// HANDLES AUDIO FILE REGISTRATION FOR SOUNDJS
 function loadSounds () {
     createjs.Sound.registerSound("assets/sounds/glass-clink-1.mp3", soundGlassClink);
     createjs.Sound.registerSound("assets/sounds/correctanswer.mp3", soundCorrectAnswer);
