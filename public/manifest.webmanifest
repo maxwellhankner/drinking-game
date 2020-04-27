@@ -3,8 +3,8 @@
   "short_name": "Images App",
   "icons": [
     {
-      "src": "assets/images/beerfoam.png",
-      "sizes": "72x72",
+      "src": "assets/images/icon.png",
+      "sizes": "240x240",
       "type": "image/png"
     }    
   ],
